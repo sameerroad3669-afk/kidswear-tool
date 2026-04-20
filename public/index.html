@@ -1,1 +1,2065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Kidswear Size Finder - Get accurate size recommendations for children aged 0-14 years based on age, height and weight." />
+  <meta name="keywords" content="kids size chart, children clothing size, kidswear size guide, baby size calculator" />
+  <meta property="og:title" content="Kids Size Finder - Free Size Recommendation Tool" />
+  <meta property="og:description" content="Find the perfect clothing size for your child in seconds!" />
+  <title>👶 KidsFit - Smart Size Recommendation Tool</title>
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       GLOBAL STYLES
+    ============================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #6C63FF;
+      --primary-dark: #5a52d5;
+      --primary-light: #8b85ff;
+      --accent: #FF6584;
+      --accent-dark: #e5506f;
+      --success: #4CAF50;
+      --warning: #FF9800;
+      --bg: #f0eeff;
+      --bg2: #faf9ff;
+      --white: #ffffff;
+      --text: #1a1a2e;
+      --text2: #555577;
+      --text3: #9999bb;
+      --border: #e8e6ff;
+      --shadow: 0 4px 24px rgba(108, 99, 255, 0.08);
+      --shadow-lg: 0 8px 40px rgba(108, 99, 255, 0.15);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ============================================
+       NAVIGATION
+    ============================================ */
+    nav {
+      background: var(--white);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .nav-brand-icon {
+      font-size: 28px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text2);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      background: var(--bg);
+      color: var(--primary);
+    }
+
+    .nav-links .btn-nav {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+    }
+
+    .nav-links .btn-nav:hover {
+      background: var(--primary-dark);
+      color: white;
+    }
+
+    .nav-badge {
+      background: var(--accent);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 20px;
+      margin-left: 4px;
+    }
+
+    /* ============================================
+       HERO SECTION
+    ============================================ */
+    .hero {
+      padding: 60px 24px 40px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      background: var(--primary)15;
+      color: var(--primary);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      border: 1px solid var(--primary)30;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text2);
+      max-width: 560px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-num {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .hero-stat-label {
+      font-size: 12px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+
+    /* ============================================
+       MAIN TOOL WRAPPER
+    ============================================ */
+    .tool-section {
+      padding: 0 24px 80px;
+    }
+
+    .tool-wrapper {
+      max-width: 980px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* ============================================
+       WIDGET CARD (Form)
+    ============================================ */
+    .widget-card {
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    /* Widget Header */
+    .widget-header {
+      background: linear-gradient(135deg, var(--primary) 0%, #8b85ff 100%);
+      padding: 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .widget-header::before,
+    .widget-header::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .widget-header::before {
+      width: 180px; height: 180px;
+      top: -60px; right: -40px;
+    }
+
+    .widget-header::after {
+      width: 120px; height: 120px;
+      bottom: -40px; left: -20px;
+    }
+
+    .widget-header-icon {
+      font-size: 40px;
+      margin-bottom: 8px;
+      display: block;
+      position: relative;
+      z-index: 1;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .widget-header h2 {
+      color: white;
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .widget-header p {
+      color: rgba(255,255,255,0.8);
+      font-size: 13px;
+      margin-top: 4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Widget Body */
+    .widget-body {
+      padding: 28px;
+    }
+
+    /* Category Toggle */
+    .cat-toggle {
+      display: flex;
+      background: #f0f0f8;
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 24px;
+      gap: 4px;
+    }
+
+    .cat-btn {
+      flex: 1;
+      padding: 11px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-family: inherit;
+    }
+
+    .cat-btn.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    /* Form Grid */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-grid.full { grid-template-columns: 1fr; }
+    .form-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .form-label .req {
+      color: var(--accent);
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 15px;
+      color: var(--text);
+      background: #fafafe;
+      transition: all 0.2s;
+      outline: none;
+      font-family: inherit;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%236C63FF' d='M5 7L0 2h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--primary);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
+    }
+
+    .form-input.error {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(255, 101, 132, 0.1);
+    }
+
+    .form-input::placeholder { color: #aab; }
+
+    /* Pill Groups */
+    .pill-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pill {
+      flex: 1;
+      padding: 11px 8px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: #fafafe;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 13px;
+      font-weight: 600;
+      color: #777;
+      font-family: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .pill-icon { font-size: 18px; }
+
+    .pill:hover {
+      border-color: var(--primary)50;
+      background: var(--primary)06;
+    }
+
+    .pill.active {
+      border-color: var(--primary);
+      background: var(--primary)12;
+      color: var(--primary);
+    }
+
+    /* Growth Toggle */
+    .growth-toggle {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #fff8f5, #fff5f8);
+      border: 2px solid #ffe4d4;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 20px;
+    }
+
+    .growth-toggle:hover {
+      border-color: var(--accent)60;
+    }
+
+    .growth-toggle.on {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, #fff3ee, #fff0f4);
+    }
+
+    .toggle-box {
+      width: 24px;
+      height: 24px;
+      border: 2px solid #ddd;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      font-size: 14px;
+      font-weight: bold;
+      color: transparent;
+    }
+
+    .growth-toggle.on .toggle-box {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .toggle-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text2);
+    }
+
+    .toggle-text small {
+      display: block;
+      font-size: 11px;
+      color: var(--text3);
+      font-weight: 400;
+      margin-top: 1px;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      padding: 17px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-submit::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(255,255,255,0.12), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.5s;
+    }
+
+    .btn-submit:hover::after { transform: translateX(100%); }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--primary)50;
+    }
+
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled { opacity: 0.7; cursor: wait; transform: none; }
+
+    /* Error message */
+    .error-msg {
+      display: none;
+      padding: 12px 16px;
+      background: #fff0f3;
+      border: 1px solid #fcc;
+      border-radius: 10px;
+      color: #c0392b;
+      font-size: 14px;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .error-msg.show { display: block; }
+
+    /* ============================================
+       RESULT PANEL
+    ============================================ */
+    .result-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Main Result Card */
+    .result-card {
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      display: none;
+    }
+
+    .result-card.show {
+      display: block;
+      animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .result-top {
+      background: linear-gradient(135deg, var(--primary)10, var(--accent)08);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 28px;
+      text-align: center;
+      position: relative;
+    }
+
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 14px;
+      background: var(--primary)15;
+      color: var(--primary);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .result-size {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+      animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .result-label {
+      font-size: 15px;
+      color: var(--text2);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .result-fit-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 20px;
+      background: white;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+
+    /* Confidence */
+    .result-body {
+      padding: 24px 28px;
+    }
+
+    .confidence-section {
+      margin-bottom: 20px;
+    }
+
+    .confidence-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text2);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .confidence-pct {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .confidence-bar-bg {
+      height: 10px;
+      background: #eee;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .confidence-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 0;
+    }
+
+    /* Measurements */
+    .measurements {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .measure-item {
+      padding: 12px;
+      background: var(--bg2);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .measure-val {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary);
+      display: block;
+    }
+
+    .measure-lbl {
+      font-size: 11px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    /* Suggestions */
+    .suggestions { margin-bottom: 20px; }
+
+    .suggestion-item {
+      padding: 12px 16px;
+      border-left: 3px solid var(--warning);
+      background: #fffbf0;
+      border-radius: 0 12px 12px 0;
+      font-size: 13px;
+      color: var(--text2);
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    /* Action Buttons */
+    .result-actions {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    .btn-shop {
+      padding: 14px 20px;
+      background: linear-gradient(135deg, var(--accent), #ff8fa3);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-shop:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--accent)40;
+    }
+
+    .btn-retry {
+      padding: 14px 18px;
+      background: var(--bg);
+      color: var(--text2);
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-retry:hover { background: var(--border); }
+
+    /* Loading state */
+    .loading-card {
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      padding: 60px 28px;
+      text-align: center;
+      display: none;
+    }
+
+    .loading-card.show { display: block; }
+
+    .spinner {
+      width: 52px;
+      height: 52px;
+      border: 5px solid #eee;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text2);
+      margin-bottom: 6px;
+    }
+
+    .loading-sub {
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    /* ============================================
+       INFO CARDS (Right side)
+    ============================================ */
+    .info-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .info-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .info-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-card-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--primary)12;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    /* Size Reference Table */
+    .size-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .size-table th {
+      padding: 8px 10px;
+      background: var(--primary)10;
+      color: var(--primary);
+      font-weight: 700;
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .size-table th:first-child { border-radius: 8px 0 0 8px; }
+    .size-table th:last-child { border-radius: 0 8px 8px 0; }
+
+    .size-table td {
+      padding: 8px 10px;
+      color: var(--text2);
+      border-bottom: 1px solid #f5f5f5;
+      font-weight: 500;
+    }
+
+    .size-table tr:last-child td { border-bottom: none; }
+    .size-table tr:hover td { background: var(--bg); }
+
+    /* ============================================
+       HOW IT WORKS
+    ============================================ */
+    .how-section {
+      padding: 80px 24px;
+      background: var(--white);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 52px;
+    }
+
+    .section-badge {
+      display: inline-block;
+      padding: 5px 14px;
+      background: var(--primary)12;
+      color: var(--primary);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
+    }
+
+    .section-header h2 {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      font-size: 16px;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+
+    .steps-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 28px 20px;
+      border-radius: 20px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary)30;
+    }
+
+    .step-num {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+      margin: 0 auto 16px;
+    }
+
+    .step-icon { font-size: 32px; margin-bottom: 12px; display: block; }
+    .step-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .step-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+    /* ============================================
+       FEATURES SECTION
+    ============================================ */
+    .features-section {
+      padding: 80px 24px;
+      background: var(--bg);
+    }
+
+    .features-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-icon-wrap {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, var(--primary)15, var(--accent)10);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 16px;
+    }
+
+    .feature-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       EMBED SECTION
+    ============================================ */
+    .embed-section {
+      padding: 80px 24px;
+      background: var(--white);
+    }
+
+    .embed-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .embed-content h2 {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .embed-content p {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .embed-steps {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .embed-steps li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text2);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .embed-steps li:last-child { border-bottom: none; }
+
+    .embed-check {
+      width: 22px;
+      height: 22px;
+      background: var(--success)15;
+      color: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+
+    .embed-code-card {
+      background: #1a1a2e;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .embed-code-header {
+      padding: 12px 20px;
+      background: #252540;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .embed-code-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .embed-code-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .embed-code-dots span:nth-child(1) { background: #ff5f57; }
+    .embed-code-dots span:nth-child(2) { background: #ffbd2e; }
+    .embed-code-dots span:nth-child(3) { background: #28c840; }
+
+    .btn-copy {
+      padding: 5px 14px;
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .btn-copy:hover { background: rgba(255,255,255,0.2); color: white; }
+
+    .embed-code-body {
+      padding: 20px;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 12.5px;
+      line-height: 1.8;
+      color: #e2e8f0;
+      overflow-x: auto;
+    }
+
+    .code-comment { color: #6c757d; }
+    .code-tag { color: #93c5fd; }
+    .code-attr { color: #fbbf24; }
+    .code-val { color: #86efac; }
+    .code-key { color: #93c5fd; }
+    .code-str { color: #86efac; }
+
+    /* ============================================
+       CTA SECTION
+    ============================================ */
+    .cta-section {
+      padding: 80px 24px;
+      background: linear-gradient(135deg, var(--primary), #8b85ff);
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 38px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .cta-section p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-cta-primary {
+      padding: 16px 32px;
+      background: white;
+      color: var(--primary);
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-cta-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .btn-cta-secondary {
+      padding: 16px 32px;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-cta-secondary:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-3px);
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      padding: 40px 24px;
+      background: #1a1a2e;
+      color: #888;
+      text-align: center;
+    }
+
+    footer .footer-brand {
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    footer p { font-size: 13px; line-height: 1.8; }
+
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 16px 0;
+    }
+
+    footer .footer-links a {
+      color: #666;
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    footer .footer-links a:hover { color: var(--primary-light); }
+
+    /* ============================================
+       TOAST NOTIFICATION
+    ============================================ */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 14px 22px;
+      background: #1a1a2e;
+      color: white;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 9999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ============================================
+       RESPONSIVE
+    ============================================ */
+    @media (max-width: 900px) {
+      .tool-wrapper { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .embed-wrapper { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 15px; }
+      .hero-stats { gap: 24px; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .nav-links .hide-mobile { display: none; }
+      .form-grid { grid-template-columns: 1fr; }
+      .result-size { font-size: 56px; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+============================================ -->
+<nav>
+  <a class="nav-brand" href="#">
+    <span class="nav-brand-icon">👶</span>
+    KidsFit
+  </a>
+  <div class="nav-links">
+    <a href="#tool" class="hide-mobile">🎯 Try Tool</a>
+    <a href="#how-it-works" class="hide-mobile">📖 How It Works</a>
+    <a href="#embed" class="hide-mobile">🔌 For Stores</a>
+    <a href="admin.html" class="btn-nav">⚙️ Admin <span class="nav-badge">Pro</span></a>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO
+============================================ -->
+<section class="hero">
+  <div class="hero-badge">
+    🌟 Trusted by 50+ Kidswear Brands
+  </div>
+  <h1>Find the Perfect Size<br>for Your Little One</h1>
+  <p>
+    Stop guessing! Our smart size recommendation tool uses your child's 
+    age, height, and weight to instantly find the perfect fit.
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">98%</div>
+      <div class="hero-stat-label">Accuracy Rate</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">13</div>
+      <div class="hero-stat-label">Size Groups</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">0-14</div>
+      <div class="hero-stat-label">Years Covered</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">Free</div>
+      <div class="hero-stat-label">Always Free</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     MAIN TOOL
+============================================ -->
+<section class="tool-section" id="tool">
+  <div class="tool-wrapper">
+
+    <!-- FORM WIDGET -->
+    <div class="widget-card">
+      <div class="widget-header">
+        <span class="widget-header-icon">👕</span>
+        <h2>Size Finder</h2>
+        <p>Enter details for an instant recommendation</p>
+      </div>
+
+      <div class="widget-body">
+
+        <!-- Category -->
+        <div class="cat-toggle">
+          <button class="cat-btn active" data-cat="tops">👕 Tops</button>
+          <button class="cat-btn" data-cat="bottoms">👖 Bottoms</button>
+        </div>
+
+        <!-- Error -->
+        <div class="error-msg" id="err-msg">⚠️ Please enter at least age or height</div>
+
+        <!-- Age + Height -->
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="form-label">
+              🎂 Age <span class="req">*</span>
+            </label>
+            <select class="form-select" id="inp-age">
+              <option value="">Select age</option>
+              <option value="0">Under 1 year</option>
+              <option value="1">1 year</option>
+              <option value="2">2 years</option>
+              <option value="3">3 years</option>
+              <option value="4">4 years</option>
+              <option value="5">5 years</option>
+              <option value="6">6 years</option>
+              <option value="7">7 years</option>
+              <option value="8">8 years</option>
+              <option value="9">9 years</option>
+              <option value="10">10 years</option>
+              <option value="11">11 years</option>
+              <option value="12">12 years</option>
+              <option value="13">13 years</option>
+              <option value="14">14 years</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">
+              📏 Height (cm)
+            </label>
+            <input type="number" class="form-input" id="inp-height"
+              placeholder="e.g. 95" min="40" max="180" inputmode="numeric">
+          </div>
+        </div>
+
+        <!-- Weight + Gender -->
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="form-label">
+              ⚖️ Weight (kg)
+            </label>
+            <input type="number" class="form-input" id="inp-weight"
+              placeholder="e.g. 15" min="2" max="70" step="0.5" inputmode="decimal">
+          </div>
+          <div class="form-field">
+            <label class="form-label">
+              👤 Gender (optional)
+            </label>
+            <div class="pill-group" id="gender-group">
+              <button class="pill active" data-val="unisex">
+                <span class="pill-icon">⭐</span>Any
+              </button>
+              <button class="pill" data-val="boy">
+                <span class="pill-icon">👦</span>Boy
+              </button>
+              <button class="pill" data-val="girl">
+                <span class="pill-icon">👧</span>Girl
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fit Preference -->
+        <div class="form-grid full" style="margin-bottom: 16px;">
+          <div class="form-field">
+            <label class="form-label">✂️ Fit Preference</label>
+            <div class="pill-group" id="fit-group">
+              <button class="pill" data-val="slim">
+                <span class="pill-icon">🤏</span>Slim
+              </button>
+              <button class="pill active" data-val="regular">
+                <span class="pill-icon">👌</span>Regular
+              </button>
+              <button class="pill" data-val="loose">
+                <span class="pill-icon">🤗</span>Loose
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Growth Buffer -->
+        <div class="growth-toggle" id="growth-toggle">
+          <div class="toggle-box" id="toggle-box">✓</div>
+          <div class="toggle-text">
+            🌱 Buy for next 3-6 months
+            <small>We'll suggest one size up for room to grow</small>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button class="btn-submit" id="btn-find">
+          ✨ Find Perfect Size
+        </button>
+
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="result-panel">
+
+      <!-- Loading -->
+      <div class="loading-card" id="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">Analyzing measurements...</div>
+        <div class="loading-sub">Comparing with 13 size categories</div>
+      </div>
+
+      <!-- RESULT CARD -->
+      <div class="result-card" id="result-card">
+        <div class="result-top">
+          <div class="result-badge" id="res-conf-badge">🎯 Best Fit</div>
+          <div class="result-size" id="res-size">--</div>
+          <div class="result-label" id="res-label">Recommended Size</div>
+          <div class="result-fit-tag" id="res-fit-tag">
+            ✨ Perfect Fit
+          </div>
+        </div>
+
+        <div class="result-body">
+          <!-- Confidence -->
+          <div class="confidence-section">
+            <div class="confidence-header">
+              <span>Confidence Score</span>
+              <span class="confidence-pct" id="res-conf-pct">85%</span>
+            </div>
+            <div class="confidence-bar-bg">
+              <div class="confidence-bar-fill" id="res-conf-bar"></div>
+            </div>
+          </div>
+
+          <!-- Measurements -->
+          <div class="measurements" id="res-measurements"></div>
+
+          <!-- Suggestions -->
+          <div class="suggestions" id="res-suggestions"></div>
+
+          <!-- Actions -->
+          <div class="result-actions">
+            <button class="btn-shop" id="btn-shop">
+              🛒 Shop This Size
+            </button>
+            <button class="btn-retry" id="btn-retry">
+              ↩ New Search
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Size Reference Card -->
+      <div class="info-card">
+        <h3>
+          <span class="info-card-icon">📊</span>
+          Quick Reference Chart
+        </h3>
+        <table class="size-table">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Age</th>
+              <th>Height</th>
+              <th>Weight</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>0-3M</strong></td><td>0-3 mo</td><td>50-62cm</td><td>3-6kg</td></tr>
+            <tr><td><strong>3-6M</strong></td><td>3-6 mo</td><td>62-68cm</td><td>6-8kg</td></tr>
+            <tr><td><strong>6-12M</strong></td><td>6-12 mo</td><td>68-76cm</td><td>8-10kg</td></tr>
+            <tr><td><strong>1-2Y</strong></td><td>1-2 yr</td><td>76-90cm</td><td>10-13kg</td></tr>
+            <tr><td><strong>2-3Y</strong></td><td>2-3 yr</td><td>90-98cm</td><td>13-15kg</td></tr>
+            <tr><td><strong>3-4Y</strong></td><td>3-4 yr</td><td>98-104cm</td><td>15-17kg</td></tr>
+            <tr><td><strong>4-5Y</strong></td><td>4-5 yr</td><td>104-110cm</td><td>17-20kg</td></tr>
+            <tr><td><strong>5-6Y</strong></td><td>5-6 yr</td><td>110-116cm</td><td>20-22kg</td></tr>
+            <tr><td><strong>6-7Y</strong></td><td>6-7 yr</td><td>116-122cm</td><td>22-25kg</td></tr>
+            <tr><td><strong>7-8Y</strong></td><td>7-8 yr</td><td>122-128cm</td><td>25-28kg</td></tr>
+            <tr><td><strong>8-10Y</strong></td><td>8-10 yr</td><td>128-140cm</td><td>28-35kg</td></tr>
+            <tr><td><strong>10-12Y</strong></td><td>10-12 yr</td><td>140-152cm</td><td>35-45kg</td></tr>
+            <tr><td><strong>12-14Y</strong></td><td>12-14 yr</td><td>152-164cm</td><td>45-55kg</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- end result-panel -->
+
+  </div>
+</section>
+
+<!-- ============================================
+     HOW IT WORKS
+============================================ -->
+<section class="how-section" id="how-it-works">
+  <div class="section-header">
+    <div class="section-badge">How It Works</div>
+    <h2>Size recommendation in 4 simple steps</h2>
+    <p>Our smart algorithm analyzes multiple measurements to give you the most accurate size with confidence score</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <span class="step-icon">🎂</span>
+      <div class="step-title">Enter Child's Age</div>
+      <div class="step-desc">Select age from 0 to 14 years. Even newborn sizing covered!</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <span class="step-icon">📏</span>
+      <div class="step-title">Add Measurements</div>
+      <div class="step-desc">Height and weight for maximum accuracy. Minimum 1 input needed.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <span class="step-icon">✂️</span>
+      <div class="step-title">Choose Fit Style</div>
+      <div class="step-desc">Slim, Regular, or Loose. Plus a growth buffer option for 3-6 months ahead.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <span class="step-icon">🎯</span>
+      <div class="step-title">Get Perfect Size</div>
+      <div class="step-desc">Instant recommendation with confidence score and alternate sizes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FEATURES
+============================================ -->
+<section class="features-section">
+  <div class="section-header">
+    <div class="section-badge">Features</div>
+    <h2>Everything stores need to sell smarter</h2>
+    <p>Built for kidswear brands who want to reduce returns and increase customer satisfaction</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon-wrap">🎯</div>
+      <div class="feature-title">AI-Powered Accuracy</div>
+      <div class="feature-desc">Multi-factor scoring using age, height, and weight with weighted algorithms for up to 98% accuracy.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon-wrap">🔌</div>
+      <div class="feature-title">Easy Embed Widget</div>
+      <div class="feature-desc">Add to any website with one line of code. Works on Shopify, WooCommerce, and custom sites.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon-wrap">📱</div>
+      <div class="feature-title">Mobile-First Design</div>
+      <div class="feature-desc">Perfectly optimized for smartphones. 70% of shoppers buy on mobile.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon-wrap">🌱</div>
+      <div class="feature-title">Growth Buffer</div>
+      <div class="feature-desc">Unique option to buy clothes that will fit for 3-6 months longer. Parents love this!</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon-wrap">📊</div>
+      <div class="feature-title">Confidence Scoring</div>
+      <div class="feature-desc">Shows parents how confident the recommendation is, reducing hesitation and cart abandonment.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon-wrap">🏷️</div>
+      <div class="feature-title">Multi-Brand Support</div>
+      <div class="feature-desc">Serve multiple clients with different size charts from one platform. Manage via admin panel.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     EMBED SECTION
+============================================ -->
+<section class="embed-section" id="embed">
+  <div class="embed-wrapper">
+    <div class="embed-content">
+      <div class="section-badge">For eCommerce Stores</div>
+      <h2>Add to your store in 60 seconds</h2>
+      <p>
+        Just paste 3 lines of code into your website. No developer needed. 
+        Works on Shopify, WooCommerce, Wix, or any custom site.
+      </p>
+      <ul class="embed-steps">
+        <li>
+          <div class="embed-check">✓</div>
+          Copy the embed code snippet
+        </li>
+        <li>
+          <div class="embed-check">✓</div>
+          Paste into your product page HTML
+        </li>
+        <li>
+          <div class="embed-check">✓</div>
+          Customize colors to match your brand
+        </li>
+        <li>
+          <div class="embed-check">✓</div>
+          Publish — it's live instantly!
+        </li>
+      </ul>
+      <a href="#tool" class="btn-cta-primary" style="display: inline-flex; text-decoration: none; color: var(--primary); background: var(--primary)15; border: 2px solid var(--primary)30; font-size:15px; padding: 13px 24px;">
+        📋 Get Embed Code
+      </a>
+    </div>
+    <div>
+      <div class="embed-code-card">
+        <div class="embed-code-header">
+          <div class="embed-code-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <button class="btn-copy" id="copy-embed">📋 Copy</button>
+        </div>
+        <div class="embed-code-body" id="embed-code-display">
+<span class="code-comment">&lt;!-- Step 1: Add this div --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">id</span>=<span class="code-val">"kidswear-size-tool"</span><span class="code-tag">&gt;&lt;/div&gt;</span>
+
+<span class="code-comment">&lt;!-- Step 2: Configure --&gt;</span>
+<span class="code-tag">&lt;script&gt;</span>
+  <span class="code-key">window.KidsSizeToolConfig</span> = {
+    <span class="code-attr">apiUrl</span>: <span class="code-str">'https://kidsfit.vercel.app/api'</span>,
+    <span class="code-attr">primaryColor</span>: <span class="code-str">'#6C63FF'</span>,
+    <span class="code-attr">shopUrl</span>: <span class="code-str">'https://yourstore.com/kids'</span>
+  };
+<span class="code-tag">&lt;/script&gt;</span>
+
+<span class="code-comment">&lt;!-- Step 3: Load widget --&gt;</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">src</span>=<span class="code-val">"https://kidsfit.vercel.app/widget.js"</span>
+  <span class="code-attr">defer</span><span class="code-tag">&gt;&lt;/script&gt;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CTA
+============================================ -->
+<section class="cta-section">
+  <h2>Ready to Reduce Returns? 🚀</h2>
+  <p>Join 50+ kidswear brands already using KidsFit to improve conversions and customer satisfaction.</p>
+  <div class="cta-buttons">
+    <a href="#tool" class="btn-cta-primary">🎯 Try It Free Now</a>
+    <a href="admin.html" class="btn-cta-secondary">⚙️ Admin Dashboard</a>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+============================================ -->
+<footer>
+  <div class="footer-brand">👶 KidsFit</div>
+  <p>Smart Size Recommendations for Kidswear Brands</p>
+  <div class="footer-links">
+    <a href="#tool">Size Tool</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#embed">Embed</a>
+    <a href="admin.html">Admin</a>
+  </div>
+  <p>Built with ❤️ for kidswear brands · Free to use · No sign-up required</p>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ============================================
+     JAVASCRIPT - Main Tool Logic
+============================================ -->
+<script>
+  // ========== STATE ==========
+  const state = {
+    category: 'tops',
+    gender: 'unisex',
+    fitPreference: 'regular',
+    growthBuffer: false,
+    result: null
+  };
+
+  // ========== SIZE CHARTS (Embedded) ==========
+  const SIZE_CHARTS = {
+    tops: {
+      "0-3M": { label: "0-3 Months", ageMonths: [0, 3], height: [50, 62], weight: [3, 6] },
+      "3-6M": { label: "3-6 Months", ageMonths: [3, 6], height: [62, 68], weight: [6, 8] },
+      "6-12M": { label: "6-12 Months", ageMonths: [6, 12], height: [68, 76], weight: [8, 10] },
+      "1-2Y": { label: "1-2 Years", ageMonths: [12, 24], height: [76, 90], weight: [10, 13] },
+      "2-3Y": { label: "2-3 Years", ageMonths: [24, 36], height: [90, 98], weight: [13, 15] },
+      "3-4Y": { label: "3-4 Years", ageMonths: [36, 48], height: [98, 104], weight: [15, 17] },
+      "4-5Y": { label: "4-5 Years", ageMonths: [48, 60], height: [104, 110], weight: [17, 20] },
+      "5-6Y": { label: "5-6 Years", ageMonths: [60, 72], height: [110, 116], weight: [20, 22] },
+      "6-7Y": { label: "6-7 Years", ageMonths: [72, 84], height: [116, 122], weight: [22, 25] },
+      "7-8Y": { label: "7-8 Years", ageMonths: [84, 96], height: [122, 128], weight: [25, 28] },
+      "8-10Y": { label: "8-10 Years", ageMonths: [96, 120], height: [128, 140], weight: [28, 35] },
+      "10-12Y": { label: "10-12 Years", ageMonths: [120, 144], height: [140, 152], weight: [35, 45] },
+      "12-14Y": { label: "12-14 Years", ageMonths: [144, 168], height: [152, 164], weight: [45, 55] }
+    },
+    bottoms: {
+      "0-3M": { label: "0-3 Months", ageMonths: [0, 3], height: [50, 62], weight: [3, 6] },
+      "3-6M": { label: "3-6 Months", ageMonths: [3, 6], height: [62, 68], weight: [6, 8] },
+      "6-12M": { label: "6-12 Months", ageMonths: [6, 12], height: [68, 76], weight: [8, 10] },
+      "1-2Y": { label: "1-2 Years", ageMonths: [12, 24], height: [76, 90], weight: [10, 13] },
+      "2-3Y": { label: "2-3 Years", ageMonths: [24, 36], height: [90, 98], weight: [13, 15] },
+      "3-4Y": { label: "3-4 Years", ageMonths: [36, 48], height: [98, 104], weight: [15, 17] },
+      "4-5Y": { label: "4-5 Years", ageMonths: [48, 60], height: [104, 110], weight: [17, 20] },
+      "5-6Y": { label: "5-6 Years", ageMonths: [60, 72], height: [110, 116], weight: [20, 22] },
+      "6-7Y": { label: "6-7 Years", ageMonths: [72, 84], height: [116, 122], weight: [22, 25] },
+      "7-8Y": { label: "7-8 Years", ageMonths: [84, 96], height: [122, 128], weight: [25, 28] },
+      "8-10Y": { label: "8-10 Years", ageMonths: [96, 120], height: [128, 140], weight: [28, 35] },
+      "10-12Y": { label: "10-12 Years", ageMonths: [120, 144], height: [140, 152], weight: [35, 45] },
+      "12-14Y": { label: "12-14 Years", ageMonths: [144, 168], height: [152, 164], weight: [45, 55] }
+    }
+  };
+
+  // ========== SCORING ENGINE ==========
+  function rangeScore(value, min, max) {
+    if (!value || !min || !max) return 0;
+    const range = max - min || 1;
+    const mid = (min + max) / 2;
+    if (value >= min && value <= max) {
+      return 1 - (Math.abs(value - mid) / (range / 2)) * 0.3;
+    }
+    const dist = value < min ? min - value : value - max;
+    return Math.max(0, 0.7 - (dist / range) * 0.5);
+  }
+
+  function calculateRecommendation(inputs) {
+    const { ageYears, height, weight, fitPreference, growthBuffer, category } = inputs;
+    const chart = SIZE_CHARTS[category];
+    const sizeKeys = Object.keys(chart);
+    const hasAge = ageYears !== null && ageYears !== undefined && ageYears !== '';
+    const hasHeight = height && height > 0;
+    const hasWeight = weight && weight > 0;
+
+    const ageMonthsTotal = hasAge ? Number(ageYears) * 12 : null;
+
+    const scores = sizeKeys.map(key => {
+      const s = chart[key];
+      let total = 0, factors = 0;
+
+      if (hasAge && s.ageMonths) {
+        total += rangeScore(ageMonthsTotal, s.ageMonths[0], s.ageMonths[1]) * 0.3;
+        factors += 0.3;
+      }
+      if (hasHeight && s.height) {
+        total += rangeScore(height, s.height[0], s.height[1]) * 0.4;
+        factors += 0.4;
+      }
+      if (hasWeight && s.weight) {
+        total += rangeScore(weight, s.weight[0], s.weight[1]) * 0.3;
+        factors += 0.3;
+      }
+      if (factors > 0 && factors < 1) total = total / factors;
+
+      const idx = sizeKeys.indexOf(key);
+      if (fitPreference === 'slim' && idx > 0) total -= 0.04;
+      if (fitPreference === 'loose' && idx < sizeKeys.length - 1) total += 0.04;
+
+      return { size: key, label: s.label, score: Math.round(total * 1000) / 1000, data: s };
+    });
+
+    scores.sort((a, b) => b.score - a.score);
+    let primary = { ...scores[0] };
+    let growthApplied = false;
+
+    if (growthBuffer) {
+      const ci = sizeKeys.indexOf(primary.size);
+      if (ci < sizeKeys.length - 1) {
+        const nk = sizeKeys[ci + 1];
+        const next = scores.find(s => s.size === nk);
+        if (next) { primary = { ...next }; growthApplied = true; }
+      }
+    }
+
+    const inputCount = (hasAge ? 1 : 0) + (hasHeight ? 1 : 0) + (hasWeight ? 1 : 0);
+    let confPct = 55 + (inputCount * 12);
+    if (primary.score > 0.85) confPct = Math.min(98, confPct + 20);
+    else if (primary.score > 0.70) confPct = Math.min(92, confPct + 12);
+    else if (primary.score > 0.55) confPct = Math.min(82, confPct + 5);
+    else confPct = Math.max(50, confPct - 5);
+
+    let confLabel = primary.score > 0.85 ? '🎯 Best Fit' :
+      primary.score > 0.70 ? '✅ Good Fit' :
+      primary.score > 0.55 ? '👍 Reasonable Fit' : '⚠️ Approximate Fit';
+
+    let fitDesc = growthApplied ? '🌱 Room to Grow (3-6 months)' :
+      fitPreference === 'slim' ? '🤏 Snug / Slim Fit' :
+      fitPreference === 'loose' ? '🤗 Comfortable Loose Fit' :
+      primary.score > 0.80 ? '✨ Perfect Fit' : '👌 Good Fit';
+
+    const suggestions = [];
+    const pi = sizeKeys.indexOf(primary.size);
+    if (!growthBuffer && pi < sizeKeys.length - 1) {
+      suggestions.push({
+        icon: '🌱',
+        text: `For 3-6 months longer wear, consider size ${chart[sizeKeys[pi + 1]].label}`
+      });
+    }
+    if (pi > 0 && fitPreference === 'regular') {
+      suggestions.push({
+        icon: '✂️',
+        text: `For a slimmer fit, ${chart[sizeKeys[pi - 1]].label} might work too`
+      });
+    }
+
+    return {
+      size: primary.size,
+      label: primary.label,
+      score: primary.score,
+      confidence: confPct,
+      confLabel,
+      fitDesc,
+      growthApplied,
+      measurements: { height: primary.data?.height, weight: primary.data?.weight },
+      suggestions
+    };
+  }
+
+  // ========== UI HELPERS ==========
+  function showToast(msg, duration = 3000) {
+    const toast = document.getElementById('toast');
+    toast.innerHTML = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), duration);
+  }
+
+  function showLoading(show) {
+    document.getElementById('loading-card').classList.toggle('show', show);
+    document.getElementById('result-card').classList.remove('show');
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('err-msg');
+    el.textContent = '⚠️ ' + msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 4000);
+  }
+
+  // ========== RENDER RESULT ==========
+  function renderResult(result) {
+    document.getElementById('loading-card').classList.remove('show');
+
+    document.getElementById('res-conf-badge').textContent = result.confLabel;
+    document.getElementById('res-size').textContent = result.size;
+    document.getElementById('res-label').textContent = result.label;
+    document.getElementById('res-fit-tag').textContent = result.fitDesc;
+    document.getElementById('res-conf-pct').textContent = result.confidence + '%';
+
+    setTimeout(() => {
+      document.getElementById('res-conf-bar').style.width = result.confidence + '%';
+    }, 200);
+
+    // Measurements
+    const measEl = document.getElementById('res-measurements');
+    let measHTML = '';
+    if (result.measurements.height) {
+      measHTML += `<div class="measure-item">
+        <span class="measure-val">${result.measurements.height[0]}-${result.measurements.height[1]}</span>
+        <span class="measure-lbl">Height (cm)</span>
+      </div>`;
+    }
+    if (result.measurements.weight) {
+      measHTML += `<div class="measure-item">
+        <span class="measure-val">${result.measurements.weight[0]}-${result.measurements.weight[1]}</span>
+        <span class="measure-lbl">Weight (kg)</span>
+      </div>`;
+    }
+    measEl.innerHTML = measHTML;
+
+    // Suggestions
+    const sugEl = document.getElementById('res-suggestions');
+    sugEl.innerHTML = result.suggestions.map(s =>
+      `<div class="suggestion-item">${s.icon} ${s.text}</div>`
+    ).join('');
+
+    // Show card
+    document.getElementById('result-card').classList.add('show');
+    state.result = result;
+
+    // Scroll on mobile
+    if (window.innerWidth < 900) {
+      document.getElementById('result-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  // ========== SUBMIT ==========
+  async function handleSubmit() {
+    const ageVal = document.getElementById('inp-age').value;
+    const heightVal = document.getElementById('inp-height').value;
+    const weightVal = document.getElementById('inp-weight').value;
+
+    if (!ageVal && !heightVal) {
+      showError('Please enter at least Age or Height');
+      document.getElementById('inp-height').classList.add('error');
+      setTimeout(() => document.getElementById('inp-height').classList.remove('error'), 3000);
+      return;
+    }
+
+    document.getElementById('err-msg').classList.remove('show');
+    document.getElementById('btn-find').disabled = true;
+
+    showLoading(true);
+
+    // Simulate processing delay for UX
+    await new Promise(r => setTimeout(r, 700));
+
+    try {
+      const result = calculateRecommendation({
+        ageYears: ageVal !== '' ? Number(ageVal) : null,
+        height: heightVal ? Number(heightVal) : null,
+        weight: weightVal ? Number(weightVal) : null,
+        fitPreference: state.fitPreference,
+        growthBuffer: state.growthBuffer,
+        category: state.category
+      });
+
+      renderResult(result);
+
+    } catch (err) {
+      showLoading(false);
+      showError('Something went wrong. Please try again.');
+    }
+
+    document.getElementById('btn-find').disabled = false;
+  }
+
+  // ========== RESET ==========
+  function handleReset() {
+    document.getElementById('result-card').classList.remove('show');
+    document.getElementById('res-conf-bar').style.width = '0';
+    state.result = null;
+    document.getElementById('inp-age').value = '';
+    document.getElementById('inp-height').value = '';
+    document.getElementById('inp-weight').value = '';
+    document.getElementById('tool').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // ========== EVENT BINDINGS ==========
+  // Category toggle
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      state.category = this.dataset.cat;
+    });
+  });
+
+  // Gender pills
+  document.querySelectorAll('#gender-group .pill').forEach(pill => {
+    pill.addEventListener('click', function () {
+      document.querySelectorAll('#gender-group .pill').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      state.gender = this.dataset.val;
+    });
+  });
+
+  // Fit pills
+  document.querySelectorAll('#fit-group .pill').forEach(pill => {
+    pill.addEventListener('click', function () {
+      document.querySelectorAll('#fit-group .pill').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      state.fitPreference = this.dataset.val;
+    });
+  });
+
+  // Growth toggle
+  document.getElementById('growth-toggle').addEventListener('click', function () {
+    state.growthBuffer = !state.growthBuffer;
+    this.classList.toggle('on', state.growthBuffer);
+    document.getElementById('toggle-box').textContent = state.growthBuffer ? '✓' : '';
+  });
+
+  // Submit
+  document.getElementById('btn-find').addEventListener('click', handleSubmit);
+
+  // Retry
+  document.getElementById('btn-retry').addEventListener('click', handleReset);
+
+  // Shop button
+  document.getElementById('btn-shop').addEventListener('click', function () {
+    const size = state.result?.size;
+    const shopUrl = window.KidsSizeToolConfig?.shopUrl || '';
+    if (shopUrl && size) {
+      window.open(`${shopUrl}?size=${encodeURIComponent(size)}`, '_blank');
+    } else {
+      showToast('🛒 Size: ' + (size || '--') + ' — Share this tool with your store!');
+    }
+  });
+
+  // Enter key on inputs
+  document.querySelectorAll('.form-input').forEach(el => {
+    el.addEventListener('keypress', e => { if (e.key === 'Enter') handleSubmit(); });
+  });
+
+  // Copy embed code
+  document.getElementById('copy-embed').addEventListener('click', function () {
+    const code = `<!-- KidsFit Size Tool -->
+<div id="kidswear-size-tool"></div>
+<script>
+  window.KidsSizeToolConfig = {
+    apiUrl: 'https://YOUR-VERCEL-URL.vercel.app/api',
+    primaryColor: '#6C63FF',
+    shopUrl: 'https://yourstore.com/kids'
+  };
+<\/script>
+<script src="https://YOUR-VERCEL-URL.vercel.app/widget.js" defer><\/script>`;
+
+    navigator.clipboard.writeText(code).then(() => {
+      showToast('✅ Embed code copied to clipboard!');
+      this.textContent = '✅ Copied!';
+      setTimeout(() => this.textContent = '📋 Copy', 2000);
+    });
+  });
+</script>
+
+</body>
+</html>
